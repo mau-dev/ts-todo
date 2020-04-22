@@ -5,7 +5,7 @@ import ToDoItem from './components/ToDoItem';
 
 import './App.css';
 
-type Todo = {
+export type Todo = {
 	content: string;
 	completed: boolean;
 };
@@ -24,9 +24,7 @@ const App: React.FC = () => {
 	return (
 		<div className='App'>
 			<AddToDo />
-			<ToDoItem todo={todos[0]} />
-			<ToDoItem todo={todos[3]} />
-			{/* 	<Todos /> */}
+			<Todos todos={todos} />
 		</div>
 	);
 };

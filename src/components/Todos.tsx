@@ -1,12 +1,19 @@
 import React from 'react';
 import ToDoItem from './ToDoItem';
+import {Todo} from '../App';
 
-function Todos() {
-	return (
-		<div className='App'>
-			<ToDoItem />
-		</div>
-	);
+interface TodosProps {
+	todos: Array<Todo>;
 }
+
+const Todos: React.FC<TodosProps> = ({todos}) => {
+	return (
+		<ul className='todos-wrap'>
+			{todos.map((todo) => {
+				return <ToDoItem key={todo.content} todo={todo} />;
+			})}
+		</ul>
+	);
+};
 
 export default Todos;
