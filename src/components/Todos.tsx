@@ -11,7 +11,7 @@ interface TodosProps {
 
 const Todos: React.FC<TodosProps> = ({todos, toggleCompleted, deleteTodo, updateTodo}) => {
 	return (
-		<ul className='todos-wrap' style={{listStyle: 'none', textAlign: 'left', width: '800px', margin: '0 auto'}}>
+		<ul className='todos-wrap'>
 			{todos.map((todo) => {
 				return (
 					<ToDoItem

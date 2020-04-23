@@ -24,7 +24,7 @@ const AddToDo: React.FC<AddTodoProps> = ({addTodo, toggleModal}) => {
 	};
 
 	return (
-		<form className='add-todo'>
+		<form className='add-todo-form '>
 			<input
 				type='text'
 				name='content'

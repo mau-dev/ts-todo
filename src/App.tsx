@@ -2,6 +2,8 @@ import React, {useState} from 'react';
 import Todos from './components/Todos';
 import AddToDo from './components/AddToDo';
 import { Button,  Modal } from 'reactstrap';
+import Toolbar from './components/layout/Toolbar'
+import Navbar from './components/layout/Navbar'
 
 import {AddTodo} from './components/AddToDo';
 import './App.css';
@@ -63,15 +65,18 @@ const App: React.FC = () => {
 	};
 
 	return (
+		
 		<div className='App' >
-			<Button onClick={toggleModal} type="button">
-			+ New To Do
-			</Button>
-			<Modal isOpen={modal} toggle={toggleModal} >
-				<AddToDo addTodo={addTodo} toggleModal={toggleModal} />
-			</Modal>	
-			<Todos todos={todos} toggleCompleted={toggleCompleted} deleteTodo={deleteTodo} updateTodo={updateTodo} />
+			<Toolbar toggleModal={toggleModal}/>
+			<Navbar />
+			<div>
+				<Modal isOpen={modal} toggle={toggleModal} className="modalDiv">
+					<AddToDo addTodo={addTodo} toggleModal={toggleModal} />
+				</Modal>	
+				<Todos todos={todos} toggleCompleted={toggleCompleted} deleteTodo={deleteTodo} updateTodo={updateTodo} />
+			</div>
 		</div>
+		
 	);
 };
 

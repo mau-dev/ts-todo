@@ -1,5 +1,6 @@
 import * as React from 'react';
 import {ToggleCompleted, DeleteTodo, UpdateTodo} from '../App';
+import { Button } from 'reactstrap';
 
 interface ToDoItemProps {
 	todo: {
@@ -24,7 +25,9 @@ const ToDoItem: React.FC<ToDoItemProps> = ({todo, toggleCompleted, deleteTodo, u
 	};
 	const liStyle = () => {
 		return {
-			background: '#E2E1E5',
+			// background: '#F5F6F8',
+			// background: 'white',
+			backgroundColor: todo.completed ? '#F5F6F8' : 'white',
 			padding: '10px',
 			borderRadius: '4px',
 			marginBottom: '4px'
@@ -38,7 +41,7 @@ const ToDoItem: React.FC<ToDoItemProps> = ({todo, toggleCompleted, deleteTodo, u
 					type='checkbox'
 					checked={todo.completed}
 					onChange={() => toggleCompleted(todo.id)}
-					style={{float: 'left'}}
+					style={{float: 'left', marginTop: '5px', marginRight: '12px'}}
 				/>
 				{/* {todo.content} */}
 				<input
@@ -47,9 +50,9 @@ const ToDoItem: React.FC<ToDoItemProps> = ({todo, toggleCompleted, deleteTodo, u
 					value={todo.content}
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateTodo(e, todo.id)}
 				/>
-				<button className='remove-todo-btn' onClick={() => deleteTodo(todo.id)} style={{float: 'right'}}>
+				<Button className='remove-todo-btn' onClick={() => deleteTodo(todo.id)}>
 					x
-				</button>
+				</Button>
 			</div>
 		</li>
 	);
