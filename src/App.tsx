@@ -3,6 +3,7 @@ import Todos from './components/Todos';
 import AddToDo from './components/AddToDo';
 import ToDoItem from './components/ToDoItem';
 
+import {AddTodo} from './components/AddToDo';
 import './App.css';
 
 export type Todo = {
@@ -10,7 +11,7 @@ export type Todo = {
 	completed: boolean;
 };
 
-const todos: Array<Todo> = [
+const todosArray: Array<Todo> = [
 	{content: 'finish the book', completed: false},
 	{content: 'exercise', completed: false},
 	{content: 'shop for groceries', completed: true},
@@ -21,9 +22,15 @@ const todos: Array<Todo> = [
 ];
 
 const App: React.FC = () => {
+	const [ todos, setTodos ] = useState<Array<Todo>>(todosArray);
+
+	const addTodo: AddTodo = (newToDoItem) => {
+		newToDoItem.trim() !== '' && setTodos([ ...todos, {content: newToDoItem, completed: false} ]);
+	};
+
 	return (
 		<div className='App'>
-			<AddToDo />
+			<AddToDo addTodo={addTodo} />
 			<Todos todos={todos} />
 		</div>
 	);

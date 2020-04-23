@@ -1,14 +1,22 @@
-import React, {useState, ChangeEvent} from 'react';
+import React, {useState, ChangeEvent, FormEvent} from 'react';
 
-const AddToDo: React.FC = () => {
+interface AddTodoProps {
+	addTodo: AddTodo;
+}
+
+export type AddTodo = (newToDoItem: string) => void;
+
+const AddToDo: React.FC<AddTodoProps> = ({addTodo}) => {
 	const [ newToDoItem, setNewToDoItem ] = useState<string>('');
 
 	const onChange = (e: ChangeEvent<HTMLInputElement>) => {
 		setNewToDoItem(e.target.value);
 	};
 
-	const onSubmit = (e: ChangeEvent<HTMLButtonElement>) => {
+	const handleSubmit = (e: FormEvent<HTMLButtonElement>) => {
 		e.preventDefault();
+		addTodo(newToDoItem);
+		setNewToDoItem('');
 	};
 
 	return (
@@ -20,7 +28,7 @@ const AddToDo: React.FC = () => {
 				placeholder='Ex. Finish the book.. '
 				onChange={onChange}
 			/>
-			<button type='submit' onSubmit={onSubmit}>
+			<button type='submit' onClick={handleSubmit}>
 				Add To Do{' '}
 			</button>
 		</form>
