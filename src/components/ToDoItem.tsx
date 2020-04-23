@@ -1,8 +1,5 @@
-import React from 'react';
-import {ToggleCompleted, DeleteTodo} from '../App';
-
-//@to-do next: make edit mode and view mode for single doTo item, by default item is set to view mode,
-//item on click (or dbl click) should activate the edit mode and display input text form to edit the existing item
+import * as React from 'react';
+import {ToggleCompleted, DeleteTodo, UpdateTodo} from '../App';
 
 interface ToDoItemProps {
 	todo: {
@@ -12,9 +9,10 @@ interface ToDoItemProps {
 	};
 	toggleCompleted: ToggleCompleted;
 	deleteTodo: DeleteTodo;
+	updateTodo: UpdateTodo;
 }
 
-const ToDoItem: React.FC<ToDoItemProps> = ({todo, toggleCompleted, deleteTodo}) => {
+const ToDoItem: React.FC<ToDoItemProps> = ({todo, toggleCompleted, deleteTodo, updateTodo}) => {
 	const getStyle = () => {
 		return {
 			background: '#E2E1E5',
@@ -34,7 +32,12 @@ const ToDoItem: React.FC<ToDoItemProps> = ({todo, toggleCompleted, deleteTodo}) 
 					onChange={() => toggleCompleted(todo.id)}
 					style={{float: 'left'}}
 				/>
-				{todo.content}
+				{/* {todo.content} */}
+				<input
+					style={{backgroundColor: 'inherit', border: 'none', outline: 'none', width: '700px'}}
+					value={todo.content}
+					onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateTodo(e, todo.id)}
+				/>
 				<button className='remove-todo-btn' onClick={() => deleteTodo(todo.id)} style={{float: 'right'}}>
 					x
 				</button>
