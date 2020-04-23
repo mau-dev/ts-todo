@@ -1,6 +1,6 @@
 import * as React from 'react';
 import {ToggleCompleted, DeleteTodo, UpdateTodo} from '../App';
-import { Button } from 'reactstrap';
+import {Button} from 'reactstrap';
 
 interface ToDoItemProps {
 	todo: {
@@ -17,9 +17,11 @@ const ToDoItem: React.FC<ToDoItemProps> = ({todo, toggleCompleted, deleteTodo, u
 	const contentStyle = () => {
 		return {
 			backgroundColor: 'inherit',
+			marginLeft: '38px',
 			border: 'none',
 			outline: 'none',
 			textDecoration: todo.completed ? 'line-through' : 'none',
+			color: todo.completed ? '#50565E' : '#2E00E4',
 			width: '700px'
 		};
 	};
@@ -38,11 +40,13 @@ const ToDoItem: React.FC<ToDoItemProps> = ({todo, toggleCompleted, deleteTodo, u
 		<li>
 			<div className='todo-item-row' style={liStyle()}>
 				<input
+					className='form-check-input'
 					type='checkbox'
 					checked={todo.completed}
 					onChange={() => toggleCompleted(todo.id)}
-					style={{float: 'left', marginTop: '5px', marginRight: '12px'}}
+					// style={{float: 'left', marginTop: '3px', marginRight: '12px'}}
 				/>
+
 				{/* {todo.content} */}
 				<input
 					// style={{backgroundColor: 'inherit', border: 'none', outline: 'none', width: '700px'}}
