@@ -12,7 +12,9 @@ export type Todo = {
 	id: number;
 };
 
-export type ToggleCompleted = (selectedTodo: Todo) => void;
+// export type ToggleCompleted = (selectedTodo: Todo) => void;
+export type ToggleCompleted = (id: number) => void;
+export type DeleteTodo = (id: number) => void;
 
 const todosArray: Array<Todo> = [
 	{id: 1, content: 'finish the book', completed: false},
@@ -27,13 +29,21 @@ const todosArray: Array<Todo> = [
 const App: React.FC = () => {
 	const [ todos, setTodos ] = useState<Array<Todo>>(todosArray);
 
-	const toggleCompleted: ToggleCompleted = (selectedTodo) => {
+	const toggleCompleted: ToggleCompleted = (id: number) => {
 		const updatedTodos = todos.map((todo) => {
-			if (todo === selectedTodo) {
+			if (todo.id === id) {
 				return {...todo, completed: !todo.completed};
 			}
 			return todo;
 		});
+		setTodos(updatedTodos);
+	};
+
+	const deleteTodo: DeleteTodo = (id: number) => {
+		// Prepare new todos state
+		const updatedTodos = todos.filter((todo) => todo.id !== id);
+
+		// Update todos state
 		setTodos(updatedTodos);
 	};
 
@@ -45,7 +55,7 @@ const App: React.FC = () => {
 	return (
 		<div className='App'>
 			<AddToDo addTodo={addTodo} />
-			<Todos todos={todos} toggleCompleted={toggleCompleted} />
+			<Todos todos={todos} toggleCompleted={toggleCompleted} deleteTodo={deleteTodo} />
 		</div>
 	);
 };
