@@ -9,7 +9,7 @@ interface TodosProps {
 
 const Todos: React.FC<TodosProps> = ({todos, toggleCompleted}) => {
 	return (
-		<ul className='todos-wrap' style={{listStyle: 'none'}}>
+		<ul className='todos-wrap' style={{listStyle: 'none', textAlign: 'left', width: '800px', margin: '0 auto'}}>
 			{todos.map((todo) => {
 				return <ToDoItem key={todo.id} todo={todo} toggleCompleted={toggleCompleted} />;
 			})}

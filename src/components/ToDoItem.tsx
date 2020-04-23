@@ -27,9 +27,16 @@ const ToDoItem: React.FC<ToDoItemProps> = ({todo, toggleCompleted}) => {
 	return (
 		<li>
 			<div className='todo-item-row' style={getStyle()}>
-				<input type='checkbox' checked={todo.completed} onChange={() => toggleCompleted(todo)} />
+				<input
+					type='checkbox'
+					checked={todo.completed}
+					onChange={() => toggleCompleted(todo)}
+					style={{float: 'left'}}
+				/>
 				{todo.content}
-				<button className='remove-todo-btn'>x</button>
+				<button className='remove-todo-btn' style={{float: 'right'}}>
+					x
+				</button>
 			</div>
 		</li>
 	);
