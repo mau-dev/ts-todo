@@ -13,19 +13,27 @@ interface ToDoItemProps {
 }
 
 const ToDoItem: React.FC<ToDoItemProps> = ({todo, toggleCompleted, deleteTodo, updateTodo}) => {
-	const getStyle = () => {
+	const contentStyle = () => {
+		return {
+			backgroundColor: 'inherit',
+			border: 'none',
+			outline: 'none',
+			textDecoration: todo.completed ? 'line-through' : 'none',
+			width: '700px'
+		};
+	};
+	const liStyle = () => {
 		return {
 			background: '#E2E1E5',
 			padding: '10px',
 			borderRadius: '4px',
-			marginBottom: '4px',
-			textDecoration: todo.completed ? 'line-through' : 'none'
+			marginBottom: '4px'
 		};
 	};
 
 	return (
 		<li>
-			<div className='todo-item-row' style={getStyle()}>
+			<div className='todo-item-row' style={liStyle()}>
 				<input
 					type='checkbox'
 					checked={todo.completed}
@@ -34,7 +42,8 @@ const ToDoItem: React.FC<ToDoItemProps> = ({todo, toggleCompleted, deleteTodo, u
 				/>
 				{/* {todo.content} */}
 				<input
-					style={{backgroundColor: 'inherit', border: 'none', outline: 'none', width: '700px'}}
+					// style={{backgroundColor: 'inherit', border: 'none', outline: 'none', width: '700px'}}
+					style={contentStyle()}
 					value={todo.content}
 					onChange={(e: React.ChangeEvent<HTMLInputElement>) => updateTodo(e, todo.id)}
 				/>
