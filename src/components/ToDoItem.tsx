@@ -8,6 +8,7 @@ interface ToDoItemProps {
 	todo: {
 		content: string;
 		completed: boolean;
+		id: number;
 	};
 }
 

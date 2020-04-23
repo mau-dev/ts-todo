@@ -10,7 +10,7 @@ const Todos: React.FC<TodosProps> = ({todos}) => {
 	return (
 		<ul className='todos-wrap'>
 			{todos.map((todo) => {
-				return <ToDoItem key={todo.content} todo={todo} />;
+				return <ToDoItem key={todo.id} todo={todo} />;
 			})}
 		</ul>
 	);
