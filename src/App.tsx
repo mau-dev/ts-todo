@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import Todos from './components/Todos';
 import AddToDo from './components/AddToDo';
-import ToDoItem from './components/ToDoItem';
+import { Button,  Modal } from 'reactstrap';
 
 import {AddTodo} from './components/AddToDo';
 import './App.css';
@@ -16,6 +16,8 @@ export type Todo = {
 export type ToggleCompleted = (id: number) => void;
 export type DeleteTodo = (id: number) => void;
 export type UpdateTodo = (e: React.ChangeEvent<HTMLInputElement>, id: number) => void;
+export type ToggleModal = (e: React.FormEvent<HTMLButtonElement>) => void;
+
 
 const todosArray: Array<Todo> = [
 	{id: 1, content: 'finish the book', completed: false},
@@ -29,6 +31,8 @@ const todosArray: Array<Todo> = [
 
 const App: React.FC = () => {
 	const [ todos, setTodos ] = useState<Array<Todo>>(todosArray);
+	const [modal, setModal] = useState(false);
+
 
 	const toggleCompleted: ToggleCompleted = (id: number) => {
 		const updatedTodos = todos.map((todo) => {
@@ -51,17 +55,25 @@ const App: React.FC = () => {
 		setTodos(updatedTodos);
 	};
 
+
+	const toggleModal = () => setModal(!modal);
 	const addTodo: AddTodo = (newToDoItem) => {
 		let length = todos.length;
 		newToDoItem.trim() !== '' && setTodos([ ...todos, {id: length + 1, content: newToDoItem, completed: false} ]);
 	};
 
 	return (
-		<div className='App'>
-			<AddToDo addTodo={addTodo} />
+		<div className='App' >
+			<Button onClick={toggleModal} type="button">
+			+ New To Do
+			</Button>
+			<Modal isOpen={modal} toggle={toggleModal} >
+				<AddToDo addTodo={addTodo} toggleModal={toggleModal} />
+			</Modal>	
 			<Todos todos={todos} toggleCompleted={toggleCompleted} deleteTodo={deleteTodo} updateTodo={updateTodo} />
 		</div>
 	);
 };
 
 export default App;
+
