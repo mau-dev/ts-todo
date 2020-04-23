@@ -12,6 +12,8 @@ export type Todo = {
 	id: number;
 };
 
+export type ToggleCompleted = (selectedTodo: Todo) => void;
+
 const todosArray: Array<Todo> = [
 	{id: 1, content: 'finish the book', completed: false},
 	{id: 2, content: 'exercise', completed: false},
@@ -25,6 +27,16 @@ const todosArray: Array<Todo> = [
 const App: React.FC = () => {
 	const [ todos, setTodos ] = useState<Array<Todo>>(todosArray);
 
+	const toggleCompleted: ToggleCompleted = (selectedTodo) => {
+		const updatedTodos = todos.map((todo) => {
+			if (todo === selectedTodo) {
+				return {...todo, completed: !todo.completed};
+			}
+			return todo;
+		});
+		setTodos(updatedTodos);
+	};
+
 	const addTodo: AddTodo = (newToDoItem) => {
 		let length = todos.length;
 		newToDoItem.trim() !== '' && setTodos([ ...todos, {id: length + 1, content: newToDoItem, completed: false} ]);
@@ -33,7 +45,7 @@ const App: React.FC = () => {
 	return (
 		<div className='App'>
 			<AddToDo addTodo={addTodo} />
-			<Todos todos={todos} />
+			<Todos todos={todos} toggleCompleted={toggleCompleted} />
 		</div>
 	);
 };
